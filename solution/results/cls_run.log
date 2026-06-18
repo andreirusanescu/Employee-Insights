@@ -1,0 +1,74 @@
+
+### Ablatia 1: DT - max_depth (criterion=entropy ~ ID3) ###
+  max_depth=3: acc=0.6431  f1_macro=0.4229
+  max_depth=5: acc=0.7027  f1_macro=0.5918
+  max_depth=8: acc=0.7434  f1_macro=0.6488
+  max_depth=12: acc=0.7280  f1_macro=0.6321
+  max_depth=20: acc=0.6793  f1_macro=0.5779
+  max_depth=None: acc=0.6731  f1_macro=0.5696
+
+### Ablatia 2: DT - min_samples_leaf (max_depth=8) ###
+  msl=1: acc=0.7434  f1_macro=0.6488
+  msl=5: acc=0.7434  f1_macro=0.6487
+  msl=20: acc=0.7434  f1_macro=0.6490
+  msl=50: acc=0.7446  f1_macro=0.6504
+  msl=100: acc=0.7456  f1_macro=0.6491
+  msl=200: acc=0.7395  f1_macro=0.6411
+
+### Ablatia 3: impactul pasilor de preprocesare (DT d=8, msl=50) ###
+  baseline_raw: acc=0.7436  f1_macro=0.6504
+  +drop_redundant_features: acc=0.7446  f1_macro=0.6504
+  +outlier_capping: acc=0.7446  f1_macro=0.6504
+  +standardizare: acc=0.7446  f1_macro=0.6504
+
+### Ablatia 4: Logistic Regression - regularizare ###
+  LR l2 C=0.01: acc=0.7495  f1_macro=0.6307
+  LR l2 C=0.1: acc=0.7562  f1_macro=0.6552
+  LR l2 C=1.0: acc=0.7572  f1_macro=0.6580
+  LR l2 C=10.0: acc=0.7570  f1_macro=0.6584
+  LR l1 C=0.1: acc=0.7562  f1_macro=0.6551
+  LR l1 C=1.0: acc=0.7572  f1_macro=0.6582
+
+### Ablatia 5: Random Forest ###
+  RF n=100 d=8: acc=0.6498  f1_macro=0.4369
+  RF n=200 d=12: acc=0.7253  f1_macro=0.6000
+  RF n=300 d=16: acc=0.7422  f1_macro=0.6339
+  RF n=300 d=None: acc=0.7385  f1_macro=0.6338
+
+### Ablatia 6: Gradient Boosting ###
+  GB d=3 lr=0.1: acc=0.7575  f1_macro=0.6634
+  GB d=5 lr=0.1: acc=0.7562  f1_macro=0.6653
+  GB d=5 lr=0.05: acc=0.7555  f1_macro=0.6645
+
+### Cele mai bune configuratii per model ###
+LogReg -> {'penalty': 'l2', 'C': 10.0, 'accuracy': 0.756953125, 'precision_macro': 0.671441100284375, 'recall_macro': 0.6520614897720245, 'f1_macro': 0.6583894979336962}
+RandomForest -> {'n_estimators': 300, 'max_depth': 16, 'accuracy': 0.7421875, 'precision_macro': 0.654372268450919, 'recall_macro': 0.6204028019627451, 'f1_macro': 0.6338598301930236}
+GradientBoosting -> {'max_depth': 5.0, 'learning_rate': 0.1, 'accuracy': 0.75625, 'precision_macro': 0.6734147427866929, 'recall_macro': 0.6581113351249621, 'f1_macro': 0.6652584090324459}
+DecisionTree -> {'min_samples_leaf': 50.0, 'accuracy': 0.744609375, 'precision_macro': 0.6558919629659614, 'recall_macro': 0.6458747608584682, 'f1_macro': 0.6504131040716967}
+[fig] cls_cm_DecisionTree.png
+[fig] cls_cm_LogReg.png
+[fig] cls_cm_RandomForest.png
+[fig] cls_cm_GradientBoosting.png
+
+### Sumar pe validare ###
+           model  accuracy  precision_macro  recall_macro  f1_macro
+GradientBoosting  0.756250         0.673415      0.658111  0.665258
+          LogReg  0.756953         0.671441      0.652061  0.658389
+    DecisionTree  0.744609         0.655892      0.645875  0.650413
+    RandomForest  0.742188         0.654372      0.620403  0.633860
+
+### Sumar pe test (ascuns) ###
+           model  accuracy  precision_macro  recall_macro  f1_macro
+GradientBoosting  0.753250         0.677646      0.660801  0.668654
+          LogReg  0.753750         0.675148      0.652834  0.660382
+    DecisionTree  0.742125         0.659694      0.649423  0.654240
+    RandomForest  0.742625         0.658195      0.623327  0.636795
+
+Cel mai bun model: GradientBoosting (f1_macro val = 0.6653)
+
+Per-class (val) pentru cel mai bun model:
+             precision  recall     f1
+No Vacation      0.882   0.917  0.899
+Small            0.558   0.550  0.554
+Medium           0.502   0.461  0.480
+Large            0.752   0.704  0.727

@@ -1,0 +1,36 @@
+{
+  "best_overall": "GradientBoosting",
+  "best_params": {
+    "LogReg": {
+      "penalty": "l1",
+      "C": 0.1,
+      "accuracy": 0.756484375,
+      "precision_macro": 0.6700064578859712,
+      "recall_macro": 0.6495244786770982,
+      "f1_macro": 0.6556918179377765
+    },
+    "RandomForest": {
+      "n_estimators": 500,
+      "max_depth": 16,
+      "min_samples_leaf": 5,
+      "class_weight": "balanced"
+    },
+    "GradientBoosting": {
+      "accuracy": 0.760625,
+      "precision_macro": 0.6820202648856666,
+      "recall_macro": 0.6594521518819499,
+      "f1_macro": 0.6697234913784275,
+      "step": "learning_rate",
+      "n_estimators": 500,
+      "max_depth": 3,
+      "learning_rate": 0.1
+    },
+    "DecisionTree": {
+      "min_samples_leaf": 100.0,
+      "accuracy": 0.745625,
+      "precision_macro": 0.6558420331095942,
+      "recall_macro": 0.6436846832616723,
+      "f1_macro": 0.6491189684275487
+    }
+  }
+}
